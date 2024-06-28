@@ -9,13 +9,14 @@ class Api::V1::CustomerController < ApplicationController
   end
 
   def index
-    subscriptions = Customer.subscription_customers
+    customer = Customer.find_by(id: params[:customer_id])
+    subscriptions = customer.subscription_customers
     render json: subscriptions, status: :ok
   end
 
   private
 
   def customer_params
-    params.require(:customer).permit(:email)
+    params.permit(:customer_id)
   end
 end

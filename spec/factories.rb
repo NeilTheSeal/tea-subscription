@@ -7,10 +7,10 @@ FactoryBot.define do
   end
 
   factory :customer do
-    first_name { "MyString" }
-    last_name { "MyString" }
-    email { "MyString" }
-    address { "MyString" }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    address { Faker::Address.full_address }
   end
 
   factory :subscription_tea do
@@ -19,15 +19,15 @@ FactoryBot.define do
   end
 
   factory :subscription do
-    title { "MyString" }
+    title { Faker::Lorem.word }
     price { 1 }
     status { 1 }
     frequency { 1 }
   end
 
   factory :tea do
-    title { "MyString" }
-    description { "MyString" }
+    title { Faker::Lorem.word }
+    description { Faker::Lorem.sentence }
     temperature { 1 }
     brew_time { 1 }
   end
