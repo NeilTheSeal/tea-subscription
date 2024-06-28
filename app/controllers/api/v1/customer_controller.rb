@@ -1,6 +1,6 @@
 class Api::V1::CustomerController < ApplicationController
   def create
-    customer = Customer.create_or_find_by(email: customer_params[:email])
+    customer = Customer.create_or_find_by(id: customer_params[:customer_id])
     if customer.save
       render json: customer, status: :created
     else

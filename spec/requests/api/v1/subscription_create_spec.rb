@@ -8,7 +8,7 @@ RSpec.describe "subscribe to a subscription", type: :request do
     post(
       "/api/v1/subscription",
       params: {
-        email: customer.email,
+        customer_id: customer.id,
         subscription_id: subscription.id
       }
     )

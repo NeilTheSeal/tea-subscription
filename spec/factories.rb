@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :subscription_customer do
     subscription { nil }
     customer { nil }
+    status { 1 }
   end
 
   factory :customer do

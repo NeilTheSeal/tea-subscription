@@ -12,6 +12,8 @@ RSpec.describe "cancel a subscription", type: :request do
   end
 
   it "cancels a subscription" do
+    expect(SubscriptionCustomer.first.status).to eq(1)
+
     delete(
       "/api/v1/subscription/#{@customer.id}",
       params: {
@@ -20,6 +22,6 @@ RSpec.describe "cancel a subscription", type: :request do
     )
     expect(response).to have_http_status(:ok)
 
-    expect(SubscriptionCustomer.count).to eq(0)
+    expect(SubscriptionCustomer.first.status).to eq(0)
   end
 end

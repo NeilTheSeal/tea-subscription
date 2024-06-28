@@ -1,9 +1,10 @@
 class Api::V1::SubscriptionController < ApplicationController
   def create
-    customer = Customer.find_or_create_by(email: subscription_params[:email])
+    customer = Customer.find_or_create_by(id: subscription_params[:customer_id])
     subscription_customer = SubscriptionCustomer.new(
       customer_id: customer.id,
-      subscription_id: subscription_params[:subscription_id]
+      subscription_id: subscription_params[:subscription_id],
+      status: 1
     )
     if subscription_customer.save
       render json: subscription_customer, status: :created
@@ -18,7 +19,8 @@ class Api::V1::SubscriptionController < ApplicationController
       customer_id: customer.id,
       subscription_id: subscription_params[:subscription_id]
     )
-    if subscription.destroy
+    if subscription
+      subscription.update(status: 0)
       render json: subscription, status: :ok
     else
       render json: subscription.errors, status: :unprocessable_entity
@@ -28,6 +30,6 @@ class Api::V1::SubscriptionController < ApplicationController
   private
 
   def subscription_params
-    params.permit(:id, :subscription_id)
+    params.permit(:customer_id, :subscription_id)
   end
 end
