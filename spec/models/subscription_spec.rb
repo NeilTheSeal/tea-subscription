@@ -14,5 +14,7 @@ RSpec.describe Subscription, type: :model do
   it "relationships" do
     should have_many(:subscription_teas)
     should have_many(:teas).through(:subscription_teas)
+    should have_many(:subscription_customers)
+    should have_many(:customers).through(:subscription_customers)
   end
 end
