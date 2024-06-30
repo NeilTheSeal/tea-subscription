@@ -23,7 +23,8 @@ class Api::V1::SubscriptionController < ApplicationController
       subscription.update(status: 0)
       render json: subscription, status: :ok
     else
-      render json: subscription.errors, status: :unprocessable_entity
+      render json: { error: "customer or subscription not found" },
+             status: :unprocessable_entity
     end
   end
 

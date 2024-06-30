@@ -10,8 +10,12 @@ class Api::V1::CustomerController < ApplicationController
 
   def index
     customer = Customer.find_by(id: params[:customer_id])
-    subscriptions = customer.subscription_customers
-    render json: subscriptions, status: :ok
+    if customer
+      subscriptions = customer.subscription_customers
+      render json: subscriptions, status: :ok
+    else
+      render json: { error: "Customer not found" }, status: :not_found
+    end
   end
 
   private
